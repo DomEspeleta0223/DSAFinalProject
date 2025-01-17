@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
+const http = require('http');
+const server = http.createServer(app);
 
 app.get('/', (req,res) => {
     res.send("Tumatakbo ang Server")
@@ -28,8 +30,14 @@ const submitForm = require('./API/Submit');
 app.use("/Submit", submitForm);
 
 //For Checking if Server is Running
-const PORT = 5001;
+//const PORT = 5001;
 
-app.listen(PORT, () => {
-    console.log(`The Server is running on http://localhost:${PORT}`);
+//app.listen(PORT, () => {
+  //  console.log(`The Server is running on http://localhost:${PORT}`);
+//});
+
+const PORT = process.env.PORT || 3001;
+
+server.listen(PORT, () => {
+    console.log(`The Server is running on Port ${PORT}`);
 });
